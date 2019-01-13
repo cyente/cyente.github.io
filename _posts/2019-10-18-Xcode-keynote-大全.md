@@ -1,14 +1,17 @@
 ---
 layout:     keynote
+title:      "JavaScript 模块化七日谈"
+subtitle:   "🎞  Slides:JavaScript Modularization Journey"
 iframe:     "//huangxuan.me/js-module-7day/"
-title:      just a jest
-subtitle:   realy
 date:       2019-10-18
-author:     Cyente
-catalog: true
+author:     "Hux"
 tags:
-    - Xcode
+    - Slides
+    - Web
+    - JavaScript
 ---
+
+
 
 > 下滑这里查看更多内容
 
