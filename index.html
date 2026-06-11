@@ -3,10 +3,373 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人网站</title>
+    <title>Cyente</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Söhne", -apple-system, "Helvetica Neue", "PingFang SC", "Noto Sans SC", sans-serif;
+            color: #191918;
+            background: #F7F5F0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2rem;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .wrapper {
+            display: flex;
+            gap: 3.5rem;
+            max-width: 760px;
+            width: 100%;
+        }
+
+        /* ---- Sidebar ---- */
+        .sidebar {
+            width: 190px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding-top: 0.25rem;
+        }
+
+        .avatar {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            background: #E8E3DA;
+            margin-bottom: 1.25rem;
+            overflow: hidden;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .sidebar h1 {
+            font-family: Georgia, "Noto Serif SC", "Source Serif Pro", serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.5rem;
+            color: #191918;
+        }
+
+        .info-list {
+            list-style: none;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            font-size: 0.8rem;
+            text-align: left;
+        }
+
+        .info-list li {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 0.15rem 0;
+        }
+
+        .info-label {
+            color: #9C958A;
+            font-size: 0.78rem;
+            letter-spacing: 0.02em;
+            flex-shrink: 0;
+        }
+
+        .info-value {
+            color: #3D3929;
+            font-weight: 450;
+            text-align: right;
+        }
+
+        .sidebar-links {
+            list-style: none;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem 0.75rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+        }
+
+        .sidebar-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: #5C5647;
+            text-decoration: none;
+            font-size: 0.78rem;
+            font-weight: 450;
+            padding: 0.3rem 0;
+            transition: color 0.2s ease;
+        }
+
+        .sidebar-links a:hover {
+            color: #C96442;
+        }
+
+        .sidebar-links .icon {
+            font-size: 0.85rem;
+        }
+
+        /* ---- Content ---- */
+        .content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .bio {
+            color: #5C5647;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            white-space: pre-line;
+            letter-spacing: 0.005em;
+        }
+
+        .section-title {
+            font-family: Georgia, "Noto Serif SC", "Source Serif Pro", serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #B8B0A2;
+            margin-bottom: 1.1rem;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid #E5E0D7;
+            margin: 2.25rem 0 1.5rem;
+        }
+
+        /* ---- Research ---- */
+        .research-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+
+        .research-list li {
+            font-size: 0.88rem;
+        }
+
+        .research-list .r-title {
+            font-family: Georgia, "Noto Serif SC", "Source Serif Pro", serif;
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: #2D2A23;
+            margin-bottom: 0.2rem;
+        }
+
+        .research-list .r-desc {
+            color: #7A7367;
+            font-size: 0.8rem;
+            line-height: 1.7;
+        }
+
+        /* ---- Works ---- */
+        .works-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .works-list a {
+            display: block;
+            padding: 0.8rem 1rem;
+            border: 1px solid #E5E0D7;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #2D2A23;
+            transition: all 0.2s ease;
+        }
+
+        .works-list a:hover {
+            background: #EDE9E0;
+            border-color: #C9C2B5;
+        }
+
+        .works-list .w-head {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .works-list .w-title {
+            font-family: Georgia, "Noto Serif SC", "Source Serif Pro", serif;
+            font-weight: 600;
+            font-size: 0.88rem;
+        }
+
+        .works-list .w-tag {
+            font-size: 0.65rem;
+            color: #B8B0A2;
+            border: 1px solid #DDD8CE;
+            border-radius: 4px;
+            padding: 0.08rem 0.4rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+        }
+
+        .works-list .w-desc {
+            color: #7A7367;
+            font-size: 0.8rem;
+            line-height: 1.65;
+        }
+
+        /* ---- Timeline ---- */
+        .timeline {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            font-size: 0.88rem;
+        }
+
+        .timeline li {
+            padding-left: 1rem;
+            border-left: 2px solid #DDD8CE;
+        }
+
+        .timeline .time {
+            font-size: 0.75rem;
+            color: #B8B0A2;
+            margin-bottom: 0.1rem;
+            letter-spacing: 0.03em;
+        }
+
+        .timeline .role {
+            font-weight: 500;
+            color: #2D2A23;
+        }
+
+        .timeline .org {
+            color: #7A7367;
+            font-size: 0.82rem;
+        }
+
+        .timeline .details {
+            margin-top: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .timeline .detail-item {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.78rem;
+            line-height: 1.5;
+        }
+
+        .timeline .detail-time {
+            color: #B8B0A2;
+            flex-shrink: 0;
+            min-width: 5.5rem;
+        }
+
+        .timeline .detail-desc {
+            color: #7A7367;
+        }
+
+        footer {
+            color: #B8B0A2;
+            font-size: 0.75rem;
+            letter-spacing: 0.02em;
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 640px) {
+            body { padding: 2rem 1.25rem; }
+            .wrapper { flex-direction: column; gap: 2rem; }
+            .sidebar { width: 100%; }
+        }
+
+        /* ---- Dark mode ---- */
+        @media (prefers-color-scheme: dark) {
+            body { background: #1C1B18; color: #E5E0D7; }
+            .sidebar h1 { color: #E5E0D7; }
+            .avatar { background: #2D2A23; }
+            .info-label { color: #7A7367; }
+            .info-value { color: #D4CFC4; }
+            .sidebar-links a { color: #9C958A; }
+            .sidebar-links a:hover { color: #D4936E; }
+            .bio { color: #9C958A; }
+            .section-title { color: #5C5647; }
+            .divider { border-color: #2D2A23; }
+            .research-list .r-title { color: #D4CFC4; }
+            .research-list .r-desc { color: #7A7367; }
+            .works-list a { border-color: #3D3929; color: #D4CFC4; }
+            .works-list a:hover { background: #2D2A23; border-color: #5C5647; }
+            .works-list .w-desc { color: #7A7367; }
+            .works-list .w-tag { color: #7A7367; border-color: #3D3929; }
+            .timeline li { border-left-color: #3D3929; }
+            .timeline .role { color: #D4CFC4; }
+            .timeline .org { color: #7A7367; }
+            .timeline .detail-time { color: #5C5647; }
+            .timeline .detail-desc { color: #7A7367; }
+            footer { color: #5C5647; }
+        }
+    </style>
 </head>
 <body>
-    <h1>test！</h1>
-    <p>test homepage。</p>
+    <div class="wrapper">
+        <aside class="sidebar" id="sidebar"></aside>
+        <main class="content" id="content"></main>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+        function render(d) {
+            document.title = d.name;
+
+            document.getElementById('sidebar').innerHTML =
+                `<div class="avatar"><img src="${d.avatar}" alt="avatar"></div>` +
+                `<h1>${d.name}</h1>` +
+                '<ul class="info-list">' +
+                d.info.map(i => `<li><span class="info-label">${i.label}</span><span class="info-value">${i.value}</span></li>`).join('') +
+                '</ul>' +
+                '<ul class="sidebar-links">' +
+                d.links.map(l => `<li><a href="${l.url}" ${l.url.startsWith('http') ? 'target="_blank"' : ''}><span class="icon">${l.icon}</span>${l.name}</a></li>`).join('') +
+                '</ul>';
+
+            document.getElementById('content').innerHTML =
+                `<p class="bio">${d.bio}</p>` +
+
+                '<section><h2 class="section-title">Research</h2><ul class="research-list">' +
+                d.research.map(r => `<li><div class="r-title">${r.title}</div><div class="r-desc">${r.desc}</div></li>`).join('') +
+                '</ul></section>' +
+
+                '<hr class="divider">' +
+
+                '<section><h2 class="section-title">Selected Works</h2><ul class="works-list">' +
+                d.works.map(w => `<li><a href="${w.url}" target="_blank"><div class="w-head"><span class="w-title">${w.title}</span><span class="w-tag">${w.tag}</span></div><div class="w-desc">${w.desc}</div></a></li>`).join('') +
+                '</ul></section>' +
+
+                '<hr class="divider">' +
+
+                '<section><h2 class="section-title">Experience</h2><ul class="timeline">' +
+                d.experience.map(e => `<li><div class="time">${e.time}</div><div class="role">${e.role}</div><div class="org">${e.org}</div>${e.details ? '<div class="details">' + e.details.map(dt => `<div class="detail-item"><span class="detail-time">${dt.time}</span><span class="detail-desc">${dt.desc}</span></div>`).join('') + '</div>' : ''}</li>`).join('') +
+                '</ul></section>' +
+                `<hr class="divider"><footer>&copy; ${new Date().getFullYear()} ${d.name}</footer>`;
+        }
+
+        render(DATA);
+    </script>
 </body>
 </html>
